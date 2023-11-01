@@ -1,0 +1,15 @@
+<html th:replace="~{/components/layout :: layout ('Oops!', ~{:: main})}">
+<body>
+	<main class="container">
+    <h1>😨 Eita! Acabou a areia de gato!...</h1>
+    <p th:text="'🕐' + ${timestamp}"></p>
+    <p th:text="'📂' + ${path}"></p>
+    <br>
+    <pre th:text="${message}"></pre>
+    <br>
+    <pre th:text="${exception}"></pre>
+    <br>
+    <pre th:text="${trace}"></pre>
+  </main>
+</body>
+</html>
