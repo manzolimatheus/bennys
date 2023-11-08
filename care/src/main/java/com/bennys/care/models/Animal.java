@@ -4,6 +4,7 @@ public class Animal {
     private String nome;
     private String especie;
     private String dono;
+    public HistoricoMedico historico;
 
     public String getNome() {
         return nome;
@@ -32,5 +33,12 @@ public class Animal {
     @Override
     public String toString() {
         return nome;
+    }
+
+    public Animal(String nome, String especie, String dono){
+        this.nome = nome;
+        this.especie = especie;
+        this.dono = dono;
+        historico = new HistoricoMedico();
     }
 }
