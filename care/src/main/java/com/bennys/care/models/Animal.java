@@ -1,9 +1,20 @@
 package com.bennys.care.models;
 
+import java.util.UUID;
+
 public class Animal {
+    private String id;
     private String nome;
     private String especie;
     private String dono;
+
+    public Animal() {
+        this.id = UUID.randomUUID().toString();
+    }
+
+    public String getId() {
+        return id;
+    }
 
     public String getNome() {
         return nome;

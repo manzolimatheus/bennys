@@ -2,20 +2,23 @@ package com.bennys.care.models;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.UUID;
 
 public class RelatorioMedico {
-    private final int id;
+    private final String id;
     private final LocalDateTime dataHora;
     private final String medicoResponsavel;
     private final String diagnostico;
     private final String receita;
+    private final String animalId;
 
-    public RelatorioMedico(int id, String medicoResponsavel, String diagnostico, String receita) {
-        this.id = id;
+    public RelatorioMedico(String medicoResponsavel, String diagnostico, String receita, String animalId) {
+        this.id = UUID.randomUUID().toString();
         this.dataHora = LocalDateTime.now();
         this.medicoResponsavel = medicoResponsavel;
         this.diagnostico = diagnostico;
         this.receita = receita;
+        this.animalId = animalId;
     }
 
     @Override
@@ -29,7 +32,15 @@ public class RelatorioMedico {
                 "Receita: " + receita + "\n";
     }
 
-    public int getId() {
-        return id;
+    public String getId() {
+        return this.id;
+    }
+
+    public String getAnimalId() {
+        return animalId;
+    }
+
+    public LocalDateTime getDataHora() {
+        return dataHora;
     }
 }

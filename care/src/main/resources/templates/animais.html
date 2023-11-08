@@ -1,0 +1,48 @@
+<html th:replace="~{/components/layout :: layout ('Animais', ~{:: main})}">
+
+<body>
+  <main class="container">
+    <p><a href="/animais">Animais</a></p>
+    <section>
+      <div class="page-header">
+        <div>
+          <h1 th:if="${q} == null" th:text="'🐱 Animais (' + ${total} + ')'"></h1>
+          <h1 th:if="${q} != null" th:text="'🔍 Buscando por ' + ${q}"></h1>
+          <p th:text="'Exibindo ' + (${offset} + ${limit}) + ' de ' + ${total} + ' resultado(s) encontrado(s).'"></p>
+          <br />
+        </div>
+        <a href="/form-animal" class="primary-button">+ Novo Animal</a>
+      </div>
+      <br />
+      <!-- Listagem -->
+      <div th:if="${total} > 0" class="animais">
+        <!-- Paginação -->
+        <div class="pagination mt-2">
+          <a th:if="${offset} > 0" th:href="'/animais?offset=' + ${back}"> ⬅ Anterior</a>
+          <a th:if="${next} != ${offset}" th:href="'/animais?offset=' + ${next}">Próximo ➡ </a>
+        </div>
+        <a th:href="'/animais/' + ${animal.getId()}" th:each="animal, i : ${animais}" class="animal-card">
+          <img th:src="@{/img/animal-placeholder.png}" th:alt="${animal.toString()}" />
+          <div class="stack">
+            <h4 th:text="${animal.getNome()}"></h4>
+            <p th:text="${animal.toString()}"></p>
+            <p th:text="'🐟 Espécie: ' + ${animal.getEspecie()}"></p>
+            <p th:text="'🤠 Dono: ' + ${animal.getDono()}"></p>
+          </div>
+        </a>
+        <!-- Paginação -->
+        <div class="pagination mt-2">
+          <a th:if="${offset} > 0" th:href="'/animais?offset=' + ${back}"> ⬅ Anterior</a>
+          <a th:if="${next} != ${offset}" th:href="'/animais?offset=' + ${next}">Próximo ➡ </a>
+        </div>
+      </div>
+      <div th:if="${animais.size()} == 0">
+
+        <h2>Nenhum animal cadastrado.</h2>
+
+      </div>
+    </section>
+  </main>
+</body>
+
+</html>

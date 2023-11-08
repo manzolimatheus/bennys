@@ -1,0 +1,77 @@
+<html th:replace="~{/components/layout :: layout ('Início', ~{:: main})}">
+
+<body>
+  <main class="container">
+    <p><a href="/animais">Animais</a> > <span th:text="${animal.getNome()}"></span></p><br />
+    <section class="card">
+      <div class="page-header">
+        <h1 th:text="${animal.getNome()}"></h1>
+        <div class="flex">
+          <a th:href="'/form-animal?id=' + ${animal.getId()}" class="ghost-button">📝 Editar</a>
+          <button onclick="toggleDialog()" class="ghost-button">📝 Novo Relatório</button>
+          <!-- Delete -->
+          <form action="/excluir-animal" method="post">
+            <input type="hidden" name="id" th:value="${animal.getId()}" />
+            <input type="submit" value="🗑️ Deletar" class="ghost-button" />
+          </form>
+        </div>
+      </div>
+      <p th:text="${animal.toString()}"></p>
+    </section>
+    <br />
+    <section class="details-grid">
+      <!-- Feed médico -->
+      <div class="stack">
+        <article class="card">
+          <h3>📄 Feed médico</h3>
+          <br />
+          <div th:if="${relatorios.size()} == 0">
+            <p>Nenhum relatório para o paciente atual...</p>
+          </div>
+        </article>
+        <article class="card" th:each="relatorio : ${relatorios}">
+          <p style="white-space: pre-line;" th:text="${relatorio.toString()}"></p>
+        </article>
+      </div>
+      <!-- Dados sobre o paciente -->
+      <div class="card">
+        <h3>💉 Dados sobre o paciente</h3>
+        <br />
+        <p>
+          <strong>Dono:</strong> <span th:text="${animal.getDono()}"></span>
+        </p>
+        <p>
+          <strong>Espécie:</strong> <span th:text="${animal.getEspecie()}"></span>
+        </p>
+      </div>
+    </section>
+    <!-- Modal de criação de relatório -->
+    <dialog id="dialogRelatorio">
+      <div class="flex space-between">
+        <h3>Novo Relatório</h3><br />
+        <button class="ghost-button" onclick="toggleDialog()">❌</button>
+      </div>
+      <br />
+      <form action="/relatorios" method="post">
+        <input type="hidden" name="animalId" th:value="${animal.getId()}">
+        <input type="text" name="medicoResponsavel" placeholder="Médico Responsável">
+        <textarea name="diagnostico" placeholder="Diagnóstico"></textarea>
+        <textarea name="receita" placeholder="Receita"></textarea>
+        <input type="submit" value="Salvar">
+      </form>
+    </dialog>
+    <script>
+      function toggleDialog() {
+        const dialog = document.querySelector('#dialogRelatorio');
+
+        if (dialog.hasAttribute('open')) {
+          dialog.removeAttribute('open');
+          return
+        }
+        dialog.setAttribute('open', true);
+      }
+    </script>
+  </main>
+</body>
+
+</html>

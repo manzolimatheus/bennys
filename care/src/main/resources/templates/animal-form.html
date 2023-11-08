@@ -1,0 +1,17 @@
+<html th:replace="~{/components/layout :: layout ('Início', ~{:: main})}">
+
+<body>
+  <main class="container">
+    <p><a href="/">Início</a> > <a href="/animais">Animais</a> > Formulário </p><br />
+    <h1>Ficha de animal</h1>
+    <br />
+    <form th:action="${action}" method="post">
+      <input type="text" name="nome" placeholder="Nome do animal" th:value="${nome}">
+      <input type="text" name="dono" placeholder="Nome do dono do animal" th:value=${dono}>
+      <input type="text" name="especie" placeholder="Espécie do animal" th:value=${especie}>
+      <input type="submit" value="Cadastrar">
+    </form>
+  </main>
+</body>
+
+</html>
