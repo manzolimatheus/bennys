@@ -3,6 +3,13 @@ package com.bennys.care.models;
 public class Gato extends Animal {
     private String tipoPelagem;
 
+    public Gato() {}
+
+    public Gato(String nome, String dono, String tipoPelagem) {
+        super(nome, dono, "Gato");
+        this.tipoPelagem = tipoPelagem;
+    }
+
     public String getTipoPelagem() {
         return tipoPelagem;
     }

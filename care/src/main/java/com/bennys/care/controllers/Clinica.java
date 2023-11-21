@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.bennys.care.factories.CachorroFactory;
 import com.bennys.care.factories.GatoFactory;
 import com.bennys.care.models.Animal;
+import com.bennys.care.models.AnimalFormDTO;
 import com.bennys.care.models.Cachorro;
 import com.bennys.care.models.Gato;
 import com.bennys.care.models.RelatorioMedico;
@@ -96,33 +96,66 @@ public class Clinica {
         Animal animal = this.animais.stream().filter(a -> a.getId().equals(id)).findFirst().orElse(null);
 
         if (animal != null) {
+            System.out.println(animal.toString());
             model.addAttribute("nome", animal.getNome());
             model.addAttribute("dono", animal.getDono());
             model.addAttribute("especie", animal.getEspecie());
             model.addAttribute("action", "/animais/" + id);
+            model.addAttribute("tipoPelagem", animal instanceof Gato ? ((Gato) animal).getTipoPelagem() : "");
+            model.addAttribute("raca", animal instanceof Cachorro ? ((Cachorro) animal).getRaca() : "");
+            model.addAttribute("id", id);
         } else {
             model.addAttribute("nome", "");
             model.addAttribute("dono", "");
             model.addAttribute("especie", "");
             model.addAttribute("action", "/animais");
+            model.addAttribute("tipoPelagem", "");
+            model.addAttribute("raca", "");
+            model.addAttribute("id", "");
         }
 
         return "animal-form";
     }
 
     @PostMapping("/animais")
-    public String cadastrarAnimal(Animal animal) {
-        this.animais.add(animal);
+    public String cadastrarAnimal(AnimalFormDTO animal) {
+
+        switch (animal.getEspecie()) {
+            case "Gato":
+                Gato gato = new Gato(animal.getNome(), animal.getDono(), animal.getTipoPelagem());
+                this.animais.add(gato);
+                break;
+            case "Cachorro":
+                Cachorro cachorro = new Cachorro(animal.getNome(), animal.getDono(), animal.getRaca());
+                this.animais.add(cachorro);
+                break;
+            default:
+                Animal animalRaw = new Animal(animal.getNome(), animal.getDono(), animal.getEspecie());
+                this.animais.add(animalRaw);
+                break;
+        }
+
         return "redirect:animais";
     }
 
     @PostMapping("/animais/{id}")
-    public String atualizarAnimal(@PathVariable String id, Animal animal) {
+    public String atualizarAnimal(@PathVariable String id, AnimalFormDTO animal) {
         Animal animalAtualizado = this.animais.stream().filter(a -> a.getId().equals(id)).findFirst().get();
 
         animalAtualizado.setNome(animal.getNome());
         animalAtualizado.setDono(animal.getDono());
         animalAtualizado.setEspecie(animal.getEspecie());
+
+        switch (animal.getEspecie()) {
+            case "Gato":
+                ((Gato) animalAtualizado).setTipoPelagem(animal.getTipoPelagem());
+                break;
+            case "Cachorro":
+                ((Cachorro) animalAtualizado).setRaca(animal.getRaca());
+                break;
+            default:
+                break;
+        }
 
         return "redirect:/animais/" + id;
     }
