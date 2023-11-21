@@ -1,48 +1,67 @@
 <html th:replace="~{/components/layout :: layout ('Animais', ~{:: main})}">
-
-<body>
-  <main class="container">
-    <p><a href="/animais">Animais</a></p>
-    <section>
-      <div class="page-header">
-        <div>
-          <h1 th:if="${q} == null" th:text="'🐱 Animais (' + ${total} + ')'"></h1>
-          <h1 th:if="${q} != null" th:text="'🔍 Buscando por ' + ${q}"></h1>
-          <p th:text="'Exibindo ' + (${offset} + ${limit}) + ' de ' + ${total} + ' resultado(s) encontrado(s).'"></p>
-          <br />
-        </div>
-        <a href="/form-animal" class="primary-button">+ Novo Animal</a>
-      </div>
-      <br />
-      <!-- Listagem -->
-      <div th:if="${total} > 0" class="animais">
-        <!-- Paginação -->
-        <div class="pagination mt-2">
-          <a th:if="${offset} > 0" th:href="'/animais?offset=' + ${back}"> ⬅ Anterior</a>
-          <a th:if="${next} != ${offset}" th:href="'/animais?offset=' + ${next}">Próximo ➡ </a>
-        </div>
-        <a th:href="'/animais/' + ${animal.getId()}" th:each="animal, i : ${animais}" class="animal-card">
-          <img th:src="@{/img/animal-placeholder.png}" th:alt="${animal.toString()}" />
-          <div class="stack">
-            <h4 th:text="${animal.getNome()}"></h4>
-            <p th:text="${animal.toString()}"></p>
-            <p th:text="'🐟 Espécie: ' + ${animal.getEspecie()}"></p>
-            <p th:text="'🤠 Dono: ' + ${animal.getDono()}"></p>
+  <body>
+    <main class="p-4">
+      <p><a href="/animais">Animais</a></p>
+      <section>
+        <div class="page-header">
+          <div>
+            <h1
+              th:if="${q} == null"
+              th:text="'🐱 Animais (' + ${total} + ')'"
+            ></h1>
+            <h1 th:if="${q} != null" th:text="'🔍 Buscando por ' + ${q}"></h1>
+            <p
+              th:text="'Exibindo ' + (${offset} + ${limit}) + ' de ' + ${total} + ' resultado(s) encontrado(s).'"
+            ></p>
+            <br />
           </div>
-        </a>
-        <!-- Paginação -->
-        <div class="pagination mt-2">
-          <a th:if="${offset} > 0" th:href="'/animais?offset=' + ${back}"> ⬅ Anterior</a>
-          <a th:if="${next} != ${offset}" th:href="'/animais?offset=' + ${next}">Próximo ➡ </a>
+          <a href="/form-animal" class="primary-button">+ Novo Animal</a>
         </div>
-      </div>
-      <div th:if="${animais.size()} == 0">
-
-        <h2>Nenhum animal cadastrado.</h2>
-
-      </div>
-    </section>
-  </main>
-</body>
-
+        <br />
+        <!-- Listagem -->
+        <div th:if="${total} > 0" class="flex flex-col gap-2 items-center">
+          <!-- Paginação -->
+          <div class="pagination mt-2">
+            <a th:if="${offset} > 0" th:href="'/animais?offset=' + ${back}">
+              ⬅ Anterior</a
+            >
+            <a
+              th:if="${next} != ${offset}"
+              th:href="'/animais?offset=' + ${next}"
+              >Próximo ➡
+            </a>
+          </div>
+          <a
+            th:href="'/animais/' + ${animal.getId()}"
+            th:each="animal, i : ${animais}"
+            class="flex gap-2 border-b-2 border-slate-300 w-full rounded p-4 shadow-sm hover:bg-slate-200 ease-in-out duration-300"
+          >
+            <div class="stack">
+              <div class="flex items-center gap-2">
+                <ion-icon name="cloud-outline"></ion-icon>
+                <h4 th:text="${animal.getNome()}" class="font-bold"></h4>
+              </div>
+              <p th:text="${animal.toString()}" class="text-gray-500"></p>
+              <p th:text="'🐟 Espécie: ' + ${animal.getEspecie()}"></p>
+              <p th:text="'🤠 Dono: ' + ${animal.getDono()}"></p>
+            </div>
+          </a>
+          <!-- Paginação -->
+          <div class="pagination mt-2">
+            <a th:if="${offset} > 0" th:href="'/animais?offset=' + ${back}">
+              ⬅ Anterior</a
+            >
+            <a
+              th:if="${next} != ${offset}"
+              th:href="'/animais?offset=' + ${next}"
+              >Próximo ➡
+            </a>
+          </div>
+        </div>
+        <div th:if="${animais.size()} == 0">
+          <h2>Nenhum animal cadastrado.</h2>
+        </div>
+      </section>
+    </main>
+  </body>
 </html>
