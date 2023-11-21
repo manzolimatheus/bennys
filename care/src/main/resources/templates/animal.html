@@ -1,40 +1,41 @@
 <html th:replace="~{/components/layout :: layout ('Início', ~{:: main})}">
 
 <body>
-  <main class="container">
-    <p><a href="/animais">Animais</a> > <span th:text="${animal.getNome()}"></span></p><br />
-    <section class="card">
-      <div class="page-header">
-        <h1 th:text="${animal.getNome()}"></h1>
-        <div class="flex">
-          <a th:href="'/form-animal?id=' + ${animal.getId()}" class="ghost-button">📝 Editar</a>
-          <button onclick="toggleDialog()" class="ghost-button">📝 Novo Relatório</button>
+  <main class="p-4">
+    <p class="text-blue-600 font-bold"><a href="/animais">Animais</a> > <span th:text="${animal.getNome()}"></span></p>
+    <br />
+    <section class="bg-white rounded-lg shadow-md p-4">
+      <div class="flex flex-wrap items-center justify-between">
+        <h1 class="text-3xl font-bold" th:text="${animal.getNome()}"></h1>
+        <div class="flex gap-4 font-bold">
+          <a th:href="'/form-animal?id=' + ${animal.getId()}">📝 Editar</a>
+          <button onclick="toggleDialog()">📝 Novo Relatório</button>
           <!-- Delete -->
-          <form action="/excluir-animal" method="post">
+          <form action="/excluir-animal" method="post" id="deleteForm">
             <input type="hidden" name="id" th:value="${animal.getId()}" />
-            <input type="submit" value="🗑️ Deletar" class="ghost-button" />
+            <input class="text-red-500" type="submit" value="🗑️ Deletar" onclick="confirmDelete()">
           </form>
         </div>
       </div>
-      <p th:text="${animal.toString()}"></p>
+      <p class="text-gray-500" th:text="${animal.toString()}"></p>
     </section>
     <br />
-    <section class="details-grid">
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-2">
       <!-- Feed médico -->
-      <div class="stack">
-        <article class="card">
+      <div class="flex flex-col gap-4">
+        <article class="bg-white rounded-lg shadow-md p-4">
           <h3>📄 Feed médico</h3>
           <br />
           <div th:if="${relatorios.size()} == 0">
             <p>Nenhum relatório para o paciente atual...</p>
           </div>
         </article>
-        <article class="card" th:each="relatorio : ${relatorios}">
+        <article class="bg-white rounded-lg shadow-md p-4" th:each="relatorio : ${relatorios}">
           <p style="white-space: pre-line;" th:text="${relatorio.toString()}"></p>
         </article>
       </div>
       <!-- Dados sobre o paciente -->
-      <div class="card">
+      <div class="bg-white rounded-lg shadow-md p-4 h-fit">
         <h3>💉 Dados sobre o paciente</h3>
         <br />
         <p>
@@ -46,29 +47,40 @@
       </div>
     </section>
     <!-- Modal de criação de relatório -->
-    <dialog id="dialogRelatorio">
-      <div class="flex space-between">
-        <h3>Novo Relatório</h3><br />
-        <button class="ghost-button" onclick="toggleDialog()">❌</button>
+    <div class="hidden z-10 fixed bg-black/50 backdrop-blur h-screen w-screen inset-0 flex items-center justify-center"
+      id="dialogRelatorio">
+      <div class="bg-white rounded-lg shadow-md p-4 w-full md:w-1/2">
+        <div class="flex justify-between gap-4 mb-4">
+          <h3 class="font-bold text-xl">Novo Relatório</h3><br />
+          <button class="ghost-button" onclick="toggleDialog()">❌</button>
+        </div>
+        <div>
+          <form action="/relatorios" method="post" class="flex flex-col gap-4">
+            <input type="hidden" name="animalId" th:value="${animal.getId()}"
+              class="p-2 bg-purple-100 rounded-lg w-full">
+            <input type="text" name="medicoResponsavel" placeholder="Médico Responsável"
+              class="p-2 bg-purple-100 rounded-lg w-full">
+            <textarea name="diagnostico" placeholder="Diagnóstico"
+              class="p-2 bg-purple-100 rounded-lg w-full"></textarea>
+            <textarea name="receita" placeholder="Receita" class="p-2 bg-purple-100 rounded-lg w-full"></textarea>
+            <input type="submit" value="Salvar" class="p-2 rounded-lg bg-purple-300 text-purple-900 font-bold">
+          </form>
+        </div>
       </div>
-      <br />
-      <form action="/relatorios" method="post">
-        <input type="hidden" name="animalId" th:value="${animal.getId()}">
-        <input type="text" name="medicoResponsavel" placeholder="Médico Responsável">
-        <textarea name="diagnostico" placeholder="Diagnóstico"></textarea>
-        <textarea name="receita" placeholder="Receita"></textarea>
-        <input type="submit" value="Salvar">
-      </form>
-    </dialog>
+    </div>
     <script>
       function toggleDialog() {
         const dialog = document.querySelector('#dialogRelatorio');
 
-        if (dialog.hasAttribute('open')) {
-          dialog.removeAttribute('open');
-          return
+        dialog.classList.toggle('hidden');
+      }
+
+      function confirmDelete() {
+        const confirm = window.confirm('Tem certeza que deseja excluir este animal?');
+
+        if (confirm) {
+          document.querySelector('#deleteForm').submit();
         }
-        dialog.setAttribute('open', true);
       }
     </script>
   </main>

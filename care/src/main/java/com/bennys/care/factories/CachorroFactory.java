@@ -17,8 +17,6 @@ public class CachorroFactory {
                 Arrays.asList("Matheus", "Raíne", "Guilherme", "Tiago", "Matheus B.", "Maromo"));
         List<String> nomes = new ArrayList<String>(
                 Arrays.asList("Snowball", "Jake", "Bolinha", "Bola", "Bolinha", "Bola"));
-        List<String> especies = new ArrayList<String>(
-                Arrays.asList("Pitbull", "Poodle", "Pastor Alemão", "Bulldog", "Vira-lata"));
         List<String> racas = new ArrayList<String>(
                 Arrays.asList("Puddle", "Labrador", "Vira-lata", "Pastor Alemão", "Bulldog"));
 
@@ -26,7 +24,7 @@ public class CachorroFactory {
             Random random = new Random();
             Cachorro Cachorro = new Cachorro();
             Cachorro.setDono(donos.get(random.nextInt(donos.size())));
-            Cachorro.setEspecie(especies.get(random.nextInt(especies.size())));
+            Cachorro.setEspecie("Cachorro");
             Cachorro.setNome(nomes.get(random.nextInt(nomes.size())));
             Cachorro.setRaca(racas.get(random.nextInt(racas.size())));
             Cachorros.add(Cachorro);

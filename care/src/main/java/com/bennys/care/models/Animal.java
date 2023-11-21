@@ -12,6 +12,13 @@ public class Animal {
         this.id = UUID.randomUUID().toString();
     }
 
+    public Animal(String nome, String dono, String especie) {
+        this.id = UUID.randomUUID().toString();
+        this.nome = nome;
+        this.dono = dono;
+        this.especie = especie;
+    }
+
     public String getId() {
         return id;
     }

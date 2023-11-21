@@ -1,22 +1,13 @@
-<header
-  th:fragment="header"
-  class="bg-white w-full flex gap-4 items-center p-2 border-b-2 border-slate-300 flex-wrap"
->
-  <h1>
-    <a th:href="@{/}">
-      <img src="https://trello.com/1/cards/655418d6eb46a48b88f1f967/attachments/6554191f7597d10f799f375a/previews/655419207597d10f799f3817/download/_c2d11c0a-2b1c-4643-9723-e2331739605d.png" alt="img" width="65" />
-    </a>
-  </h1>
+<header th:fragment="header" class="bg-white w-full flex gap-4 md:gap-12 items-center p-2 border-b-2 border-slate-300 flex-wrap">
+  <a th:href="@{/}">
+    <img th:src="@{/img/bennys-logo.webp}" width="65" alt="Logo Tio Benny's" />
+  </a>
   <ul class="flex gap-4 items-center">
-    <li><a href="/">início</a></li>
-    <li><a href="/animais">animais</a></li>
+    <li class="font-bold"><a href="/">início</a></li>
+    <li class="font-bold"><a href="/animais">animais</a></li>
   </ul>
-  <form method="get" action="/animais" class="w-full md:w-1/2 lg:w-1/4">
-    <input
-      type="search"
-      name="q"
-      placeholder="buscar animal"
-      class="bg-white rounded shadow p-2 w-full"
-    />
+  <form method="get" action="/animais" class="w-full md:w-1/2">
+    <input type="search" name="q" placeholder="buscar animal"
+      class="bg-white rounded-lg shadow p-2 w-full border-2 border-slate-300" />
   </form>
 </header>

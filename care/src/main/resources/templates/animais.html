@@ -1,67 +1,58 @@
 <html th:replace="~{/components/layout :: layout ('Animais', ~{:: main})}">
-  <body>
-    <main class="p-4">
-      <p><a href="/animais">Animais</a></p>
-      <section>
-        <div class="page-header">
-          <div>
-            <h1
-              th:if="${q} == null"
-              th:text="'🐱 Animais (' + ${total} + ')'"
-            ></h1>
-            <h1 th:if="${q} != null" th:text="'🔍 Buscando por ' + ${q}"></h1>
-            <p
-              th:text="'Exibindo ' + (${offset} + ${limit}) + ' de ' + ${total} + ' resultado(s) encontrado(s).'"
-            ></p>
-            <br />
-          </div>
-          <a href="/form-animal" class="primary-button">+ Novo Animal</a>
+
+<body>
+  <main class="p-4">
+    <p class="text-blue-600 font-bold"><a href="/animais">Animais</a></p>
+    <section>
+      <div class="mt-4">
+        <div>
+          <h1 class="text-3xl font-bold" th:if="${q} == null" th:text="'🐱 Animais (' + ${total} + ')'"></h1>
+          <h1 class="text-3xl font-bold" th:if="${q} != null" th:text="'🔍 Buscando por ' + ${q}"></h1>
+          <p class="text-gray-500"
+            th:text="'Exibindo ' + (${offset} + ${limit}) + ' de ' + ${total} + ' resultado(s) encontrado(s).'"></p>
+          <br />
         </div>
-        <br />
-        <!-- Listagem -->
-        <div th:if="${total} > 0" class="flex flex-col gap-2 items-center">
-          <!-- Paginação -->
-          <div class="pagination mt-2">
-            <a th:if="${offset} > 0" th:href="'/animais?offset=' + ${back}">
-              ⬅ Anterior</a
-            >
-            <a
-              th:if="${next} != ${offset}"
-              th:href="'/animais?offset=' + ${next}"
-              >Próximo ➡
-            </a>
-          </div>
-          <a
-            th:href="'/animais/' + ${animal.getId()}"
-            th:each="animal, i : ${animais}"
-            class="flex gap-2 border-b-2 border-slate-300 w-full rounded p-4 shadow-sm hover:bg-slate-200 ease-in-out duration-300"
-          >
-            <div class="stack">
-              <div class="flex items-center gap-2">
-                <ion-icon name="cloud-outline"></ion-icon>
-                <h4 th:text="${animal.getNome()}" class="font-bold"></h4>
-              </div>
-              <p th:text="${animal.toString()}" class="text-gray-500"></p>
-              <p th:text="'🐟 Espécie: ' + ${animal.getEspecie()}"></p>
-              <p th:text="'🤠 Dono: ' + ${animal.getDono()}"></p>
-            </div>
+        <a class="p-2 rounded-lg bg-purple-300 text-purple-900 font-bold" href="/form-animal">+ Novo Animal</a>
+      </div>
+      <br />
+      <!-- Listagem -->
+      <div th:if="${total} > 0" class="flex flex-col gap-2 items-center">
+        <!-- Paginação -->
+        <div class="flex gap-4 mt-2">
+          <a class="flex items-center gap-2 font-bold" th:if="${offset} > 0" th:href="'/animais?offset=' + ${back}">
+            <ion-icon name="chevron-back-outline"></ion-icon> Anterior</a>
+          <a class="flex items-center gap-2 font-bold" th:if="${next} != ${offset}"
+            th:href="'/animais?offset=' + ${next}">Próximo <ion-icon name="chevron-forward-outline"></ion-icon>
           </a>
-          <!-- Paginação -->
-          <div class="pagination mt-2">
-            <a th:if="${offset} > 0" th:href="'/animais?offset=' + ${back}">
-              ⬅ Anterior</a
-            >
-            <a
-              th:if="${next} != ${offset}"
-              th:href="'/animais?offset=' + ${next}"
-              >Próximo ➡
-            </a>
+        </div>
+        <a th:href="'/animais/' + ${animal.getId()}" th:each="animal, i : ${animais}"
+          class="bg-white flex gap-2 border-b-2 border-slate-300 w-full rounded p-4 shadow-sm hover:bg-purple-50 ease-in-out duration-300">
+          <div class="stack">
+            <div class="flex items-center gap-2">
+              <ion-icon name="cloud-outline"></ion-icon>
+              <h4 th:text="${animal.getNome()}" class="font-bold"></h4>
+            </div>
+            <p th:text="${animal.toString()}" class="text-gray-500"></p>
+            <p th:text="'🐟 Espécie: ' + ${animal.getEspecie()}"></p>
+            <p th:text="'🤠 Dono: ' + ${animal.getDono()}"></p>
           </div>
+        </a>
+        <!-- Paginação -->
+        <div class="flex gap-4 mt-2">
+          <a class="flex items-center gap-2 font-bold" th:if="${offset} > 0" th:href="'/animais?offset=' + ${back}">
+            <ion-icon name="chevron-back-outline"></ion-icon> Anterior</a>
+          <a class="flex items-center gap-2 font-bold" th:if="${next} != ${offset}"
+            th:href="'/animais?offset=' + ${next}">Próximo <ion-icon name="chevron-forward-outline"></ion-icon>
+          </a>
         </div>
-        <div th:if="${animais.size()} == 0">
-          <h2>Nenhum animal cadastrado.</h2>
-        </div>
-      </section>
-    </main>
-  </body>
+      </div>
+      <div class="flex flex-col items-center p-4" th:if="${animais.size()} == 0">
+        <dotlottie-player src="https://lottie.host/51f6814b-e8bf-49b8-b8be-5f7a6244e554/PZ9ubVv8Mf.json"
+          background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></dotlottie-player>
+        <h2>Poxa...Nenhum animal encontrado! 🙁</h2>
+      </div>
+    </section>
+  </main>
+</body>
+
 </html>

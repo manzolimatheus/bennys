@@ -1,16 +1,83 @@
 <html th:replace="~{/components/layout :: layout ('Início', ~{:: main})}">
 
 <body>
-  <main class="container">
-    <p><a href="/">Início</a> > <a href="/animais">Animais</a> > Formulário </p><br />
-    <h1>Ficha de animal</h1>
-    <br />
-    <form th:action="${action}" method="post">
-      <input type="text" name="nome" placeholder="Nome do animal" th:value="${nome}">
-      <input type="text" name="dono" placeholder="Nome do dono do animal" th:value=${dono}>
-      <input type="text" name="especie" placeholder="Espécie do animal" th:value=${especie}>
-      <input type="submit" value="Cadastrar">
-    </form>
+  <main class="p-4">
+    <p class="text-blue-600 font-bold"><a href="/">Início</a> > <a href="/animais">Animais</a> > Formulário </p><br />
+    <div class="flex flex-col items-center">
+      <form th:action="${action}" method="post"
+        class="flex flex-col items-center gap-4 bg-white rounded-lg p-12 w-full md:w-1/2 shadow-md">
+        <img th:src="@{/img/bennys-logo.webp}" width="65" alt="Logo Tio Benny's" />
+        <h1 class="text-2xl font-bold">Ficha de animal</h1>
+        <div class="w-full form-group">
+          <label for="nome" class="text-sm font-bold">Nome</label>
+          <input type="text" name="nome" placeholder="Nome do animal" th:value="${nome}"
+            class="p-2 bg-purple-100 rounded-lg w-full" required>
+        </div>
+        <div class="w-full form-group">
+          <label for="dono" class="text-sm font-bold">Dono</label>
+          <input type="text" name="dono" placeholder="Nome do dono do animal" th:value=${dono}
+            class="p-2 bg-purple-100 rounded-lg w-full" required>
+        </div>
+        <div class="w-full form-group">
+          <label for="especie" class="text-sm font-bold">Espécie <span class="font-sm text-slate-400">A espécie não pode ser alterada posteriormente.</span></label>
+          <input th:if="${id} != ''" type="hidden" name="especie" th:value="${especie}">
+          <select th:if="${id} == ''" name="especie" class="p-2 bg-purple-100 rounded-lg w-full" required>
+            <option value="Selecione">Selecione uma opção</option>
+            <option value="Cachorro" th:selected="${especie} == 'Cachorro'">Cachorro</option>
+            <option value="Gato" th:selected="${especie} == 'Gato'">Gato</option>
+          </select>
+        </div>
+        <div class="w-full form-group" data-allow="Gato">
+          <label for="tipoPelagem" class="text-sm font-bold">Tipo de Pelagem</label>
+          <input type="text" name="tipoPelagem" placeholder="Tipo de pelagem do felino" th:value=${tipoPelagem}
+            class="p-2 bg-purple-100 rounded-lg w-full">
+        </div>
+        <div class="w-full form-group" data-allow="Cachorro">
+          <label for="raca" class="text-sm font-bold">Raça</label>
+          <input type="text" name="raca" placeholder="Raça" th:value=${raca}
+            class="p-2 bg-purple-100 rounded-lg w-full">
+        </div>
+        <input type="submit" value="Salvar" class="p-2 rounded-lg bg-purple-300 text-purple-900 font-bold w-full">
+      </form>
+    </div>
+    <script>
+
+      window.onload = () => {
+        displayDinamicallyOnEdit();
+        listenForDynamicFields();
+      }
+
+      function displayDinamicallyOnEdit() {
+        const especie = document.querySelector('[name="especie"]');
+        const dynamicFields = document.querySelectorAll('[data-allow]');
+
+        dynamicFields.forEach((field) => checkIfIsAllowed(field, especie));
+      }
+
+      function checkIfIsAllowed(field, especie) {
+        const allowed = field.dataset.allow.split(',').map((item) => item.trim());
+        const isAllowed = allowed.includes(especie.value);
+
+        if (isAllowed) {
+          field.classList.remove('hidden');
+        } else {
+          field.classList.add('hidden');
+        }
+      }
+
+      function listenForDynamicFields() {
+
+        const especie = document.querySelector('[name="especie"]');
+
+        especie.addEventListener('change', (event) => {
+          const value = event.target.value;
+          const dynamicFields = document.querySelectorAll('[data-allow]');
+
+          dynamicFields.forEach((field) => checkIfIsAllowed(field, especie));
+        })
+      }
+
+    </script>
   </main>
 </body>
 

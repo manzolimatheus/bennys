@@ -3,6 +3,13 @@ package com.bennys.care.models;
 public class Cachorro extends Animal {
     private String raca;
 
+    public Cachorro() {}
+
+    public Cachorro(String nome, String dono, String raca) {
+        super(nome, dono, "Cachorro");
+        this.raca = raca;
+    }
+
     public String getRaca() {
         return raca;
     }
