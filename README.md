@@ -26,7 +26,39 @@ Execute a classe "CareApplication" e acesse no navegador o endereço da aplicaç
 
 ## Como usar
 
-_Adicionar prints do funcionamento do projeto._
+Na aba "Animais", você verá uma lista dos animais cadastrados. Neste caso, ainda não há nenhum animal cadastrado.
+
+![Lista de Animais](.\screenshots\1_animais.png)
+
+Ao clicar em "Novo animal", será apresentada a ficha de cadastro de animal. Podem ser cadastrados cães e gatos, e
+cada um tem um atributo especial. Cães possuem "raça" e gatos possuem "tipo de pelagem".
+
+![Cadastrar cão](.\screenshots\2_cachorro.png)
+
+![Cadastrar gato](.\screenshots\3_gato.png)
+
+Ao clicar em salvar, você será redirecionado à aba "Animal" novamente, onde agora há registros de animais.
+
+![Lista de Animais com registros](.\screenshots\4_animais_cadastrados.png)
+
+Ao clicar em um animal é possível ver os dados de seu registro.
+
+![Dados do Animal](.\screenshots\5_dados_do_animal.png)
+
+É possível fazer um relatório médico clicando em "Novo Relatório".
+
+![Relatório não preenchido](.\screenshots\6_relatorio_nao_preenchido.png)
+
+![Relatório preenchido](.\screenshots\7_relatorio_preenchido.png)
+
+Após cadastrar um relatório, ele aparecerá no "Feed Médico", com os relatórios mais recentes no topo.
+
+![Feed Médico](.\screenshots\8_feed_medico.png)
+
+Para excluir o registro de um animal, clique em "Deletar". Um pop-up aparecerá para que a decisão seja
+confirmada.
+
+![Excluir animal](.\screenshots\9_deletar_animal.png)
 
 ## Desenvolvido por:
 
