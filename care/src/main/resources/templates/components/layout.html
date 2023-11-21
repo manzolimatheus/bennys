@@ -1,14 +1,23 @@
 <!DOCTYPE html>
 <html lang="pt-BR" th:fragment="layout(pageTitle, children)">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title th:text="'Tio Benny\'s | ' + ${pageTitle}"></title>
-    <link th:href="@{/css/app.css}" rel="stylesheet">
-</head>
-<body>
+    <link th:href="@{/css/app.css}" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+  </head>
+  <body>
     <header th:insert="~{components/header :: header}"></header>
-    <main th:insert="${children}"></main>
+    <main th:insert="${children}" class="bg-slate-100 min-h-screen"></main>
     <footer th:insert="~{components/footer :: footer}"></footer>
-</body>
+  </body>
 </html>
