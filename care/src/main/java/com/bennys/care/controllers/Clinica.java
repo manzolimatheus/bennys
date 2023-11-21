@@ -31,11 +31,11 @@ public class Clinica {
     public Clinica() {
         this.animais = new ArrayList<Animal>();
 
-        List<Gato> gatos = GatoFactory.gerar(25);
-        List<Cachorro> cachorros = CachorroFactory.gerar(25);
+        // List<Gato> gatos = GatoFactory.gerar(25);
+        // List<Cachorro> cachorros = CachorroFactory.gerar(25);
 
-        this.animais.addAll(gatos);
-        this.animais.addAll(cachorros);
+        // this.animais.addAll(gatos);
+        // this.animais.addAll(cachorros);
 
         this.relatorios = new ArrayList<RelatorioMedico>();
     }
@@ -73,6 +73,7 @@ public class Clinica {
         model.addAttribute("back", offset - limit < 0 ? 0 : offset - limit);
         model.addAttribute("next", offset + limit >= totalAnimais.size() ? offset : offset + limit);
         model.addAttribute("q", q);
+        model.addAttribute("recordsThisPage", totalAnimais.size() < limit ? totalAnimais.size() : limit);
 
         return "animais";
     }
