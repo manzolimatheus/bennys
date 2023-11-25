@@ -77,7 +77,7 @@ public class Clinica {
 
         for (Integer i = 0; i <= 3; i++) {
             retornoPerMonth parcial = new retornoPerMonth();
-            parcial.mes = meses.get(i); 
+            parcial.mes = meses.get(i);
             parcial.qtdConsulta = i * 50;
             retornoList.add(parcial);
         }
