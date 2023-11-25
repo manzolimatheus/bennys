@@ -49,16 +49,16 @@ Ao clicar em um animal é possível ver os dados de seu registro.
 
 ![Relatório não preenchido](./screenshots/6_relatorio_nao_preenchido.png)
 
-![Relatório preenchido](./screenshots/7_relatorio_preenchido.png)
+![Relatório preenchido](./screenshots/7_Relatorio_preenchido.png)
 
 Após cadastrar um relatório, ele aparecerá no "Feed Médico", com os relatórios mais recentes no topo.
 
-![Feed Médico](./screenshots/8_feed_medico.png)
+![Feed Médico](./screenshots/8_Feed_medico.png)
 
 Para excluir o registro de um animal, clique em "Deletar". Um pop-up aparecerá para que a decisão seja
 confirmada.
 
-![Excluir animal](./screenshots/9_deletar_animal.png)
+![Excluir animal](./screenshots/9_Deletar_animal.png)
 
 ## Desenvolvido por:
 
