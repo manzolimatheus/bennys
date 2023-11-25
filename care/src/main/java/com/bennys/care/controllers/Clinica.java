@@ -1,8 +1,12 @@
 package com.bennys.care.controllers;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +24,11 @@ import com.bennys.care.models.AnimalFormDTO;
 import com.bennys.care.models.Cachorro;
 import com.bennys.care.models.Gato;
 import com.bennys.care.models.RelatorioMedico;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import ch.qos.logback.classic.encoder.JsonEncoder;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 
 @Controller
 @RequestMapping("/")
@@ -41,7 +50,46 @@ public class Clinica {
     }
 
     @GetMapping("/")
-    public String index() {
+    public String index(Model model) {
+        List<Animal> animais = this.animais;
+        Integer qtdDog = 0;
+        Integer qtdCat = 0;
+        List<String> meses = new ArrayList<String>(Arrays.asList("Setembro", "Outubro", "Novembro", "Dezembro"));
+        List<retornoPerMonth> retornoList = new ArrayList<retornoPerMonth>();
+        String maisAtendidos = "";
+
+        for (Animal animal : animais) {
+            if (animal instanceof Cachorro) {
+                qtdDog++;
+                continue;
+            } else if (animal instanceof Gato) {
+                qtdCat++;
+                continue;
+            }
+        }
+        if(qtdDog > qtdCat){
+            maisAtendidos = "Cachorros 🐶";
+        }else if(qtdCat > qtdDog){
+            maisAtendidos = "Gatos 🐈";
+        }else{
+            maisAtendidos = "Gatos 🐈 e Cachorros 🐶";
+        }
+
+        for (Integer i = 0; i <= 3; i++) {
+            retornoPerMonth parcial = new retornoPerMonth();
+            parcial.mes = meses.get(i);
+            parcial.qtdConsulta = i * 50;
+            retornoList.add(parcial);
+        }
+        retornoToGraph retorno = new retornoToGraph();
+        retorno.consultas = retornoList;
+
+        model.addAttribute("consultasMonth", retorno);
+        model.addAttribute("qtdDog", qtdDog);
+        model.addAttribute("qtdCat", qtdCat);
+        model.addAttribute("qtdAtendimentos", this.animais.size() - 50);
+        model.addAttribute("maisAtendidos", maisAtendidos);
+        
         return "index";
     }
 
@@ -177,4 +225,12 @@ public class Clinica {
         return "redirect:" + referrer;
     }
 
+    public class retornoToGraph {
+        public List<retornoPerMonth> consultas;
+    }
+
+    public class retornoPerMonth {
+        public String mes;
+        public Integer qtdConsulta;
+    }
 }
