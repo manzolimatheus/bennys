@@ -3,6 +3,7 @@
 ![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 
 # Tio Benny's Clínica Veterinária
 
@@ -49,16 +50,16 @@ Ao clicar em um animal é possível ver os dados de seu registro.
 
 ![Relatório não preenchido](./screenshots/6_relatorio_nao_preenchido.png)
 
-![Relatório preenchido](./screenshots/7_relatorio_preenchido.png)
+![Relatório preenchido](./screenshots/7_Relatorio_preenchido.png)
 
 Após cadastrar um relatório, ele aparecerá no "Feed Médico", com os relatórios mais recentes no topo.
 
-![Feed Médico](./screenshots/8_feed_medico.png)
+![Feed Médico](./screenshots/8_Feed_medico.png)
 
 Para excluir o registro de um animal, clique em "Deletar". Um pop-up aparecerá para que a decisão seja
 confirmada.
 
-![Excluir animal](./screenshots/9_deletar_animal.png)
+![Excluir animal](./screenshots/9_Deletar_animal.png)
 
 ## Desenvolvido por:
 
