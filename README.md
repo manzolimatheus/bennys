@@ -9,7 +9,7 @@
 
 ## Vídeo Demonstração
 <a href="https://www.youtube.com/watch?v=56baquMKKcw">
-  <img src="./screenshots/video.png" alt="Vídeo demonstração">
+  <img src="./screenshots/vídeo.png" alt="Vídeo demonstração">
 </a>
 
 ## Descrição do projeto
