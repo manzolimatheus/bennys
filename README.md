@@ -7,6 +7,11 @@
 
 # Tio Benny's Clínica Veterinária
 
+## Vídeo Demonstração
+<a href="https://www.youtube.com/watch?v=56baquMKKcw">
+  <img src="./screenshots/video.png" alt="Vídeo demonstração">
+</a>
+
 ## Descrição do projeto
 
 O sistema foi feito para o gerenciamento de uma clínica veterinária, que automatiza as seguintes funções:
