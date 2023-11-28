@@ -32,6 +32,15 @@ Execute a classe "CareApplication" e acesse no navegador o endereço da aplicaç
 
 ## Como usar
 
+Na tela inicial você verá alguns gráficos e estatísticas dos atendimentos da clínica,
+além dos botões para ir à aba "Animais" e a barra de pesquisa.
+
+![Tela inicial 1](./screenshots/10_tela_inicial_1.png)
+
+![Tela inicial 2](./screenshots/11_tela_inicial_2.png)
+
+![Tela inicial 3](./screenshots/12_tela_inicial_3.png)
+
 Na aba "Animais", você verá uma lista dos animais cadastrados. Neste caso, ainda não há nenhum animal cadastrado.
 
 ![Lista de Animais](./screenshots/1_animais.png)
