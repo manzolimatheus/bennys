@@ -28,7 +28,7 @@ Execute a classe "CareApplication" e acesse no navegador o endereço da aplicaç
 ## Como usar
 
 Na tela inicial você verá alguns gráficos e estatísticas dos atendimentos da clínica,
-além dos botões para ir à aba "animais" e a barra de pesquisa.
+além dos botões para ir à aba "Animais" e a barra de pesquisa.
 
 ![Tela inicial 1](./screenshots/10_tela_inicial_1.png)
 
